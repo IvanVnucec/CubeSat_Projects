@@ -3,7 +3,6 @@
 #include "parser.h"
 #include <SoftwareSerial.h>
 #include "pid_reg.h"
-#include "kalman_1d.h"
 
 #include <stdlib.h>
 
@@ -42,19 +41,9 @@ bool flag_regulation = false; // wether we use PID regulation, disabled by deafu
 // PID regulator handle
 PID_Handle_t hpid;
 
-// Kalman filter handle
-Kalman1D_Handle_t hkf;
-
 float dx;               /* Start value of the Transition variable */
-float z;                /* Measurment */
-float filter_output;    /* Filtered State variable */
-float dv;               /* dv measurment */
-float dt;
 
-float x = 0.0f;         /* State variable */
-float P = 100.0f;       /* Start value of the State variable variance */
-float Q = 0.1f;         /* Transition function variance */
-float R = 0.1f;         /* Measurment variance */
+float angle = 0.0;
 
 /**************************************************************************************
                                       SETUP
@@ -80,8 +69,8 @@ void setup() {
   // Initialize PID regulator
   PID_Init(&hpid, KP, KI, KD, iteration_time);
 
-  // Initialize Kalman filter
-  K1D_Init(&hkf, x, P);
+  // Initialize the angle to 0.0
+  angle = 0.0;
 
 }
 
@@ -99,26 +88,16 @@ void loop() {
   // wx = IMU.getGyroX_rads();
   // wy = IMU.getGyroY_rads();
   wz = IMU.getGyroZ_rads();
-
-  hx = IMU.getMagX_uT();
-  hy = IMU.getMagY_uT();
-  float angle = atan2f(hy, hx);
-  // we want angle from 0 to Pi
-  angle = angle + 3.14159 / 2;
   
-  x = angle;
-  dv = wz;
-  dt = iteration_time;
-  
-  dx = dv * dt;
-  K1D_Predict(&hkf, dx, Q);
+  dx = wz * iteration_time;
 
-  z = angle;
-  K1D_Update(&hkf, z, R);
+  // Integrate the angular velocity to get the angle
+  angle = angle + dx;
 
-  filter_output = K1D_Output(&hkf);
+  // Here should then go the regulation of the angle.
+  // ...
 
-  // ========= PID control of Z-axis =================
+  // ========= PID control of the angular velocity about Z-axis =================
   if (flag_regulation == true) {
     error = wz_desired_value - wz; // odstupanje od zeljene vrijednosti
 
