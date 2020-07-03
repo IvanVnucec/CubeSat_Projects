@@ -1,7 +1,7 @@
 # FERSAT-ZAD3-PID-Regulator
 
 ## PID regulator development documentation is linked below.
-https://github.com/IvanVnucec/FERSAT-ZAD3-PID-Regulator/blob/master/documentation/PID_Regulator_development.pdf
+https://github.com/IvanVnucec/CubeSat_Projects/blob/master/FERSAT-ZAD3-PID_Regulator/documentation/PID_Regulator_development.pdf
 
 ## Pictures
 ### Testbed 
