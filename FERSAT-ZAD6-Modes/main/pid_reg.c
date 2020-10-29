@@ -79,3 +79,8 @@ float PID_Regulate(PID_Handle_t *hpid, float error) {
 
     return hpid->u0;    /* Return regulator output value */
 }
+
+
+void PID_ResetIntegral(PID_Handle_t *hpid) {
+  hpid->integral = 0.0f;
+}

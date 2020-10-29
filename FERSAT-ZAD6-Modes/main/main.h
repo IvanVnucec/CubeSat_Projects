@@ -1,8 +1,10 @@
 #ifndef MAIN_H_INCLUDED
 #define MAIN_H_INCLUDED
 
+
 #include <stdbool.h>
 #include <stdint.h>
+
 
 enum regulationMode_E {
   REGULATION_MODE_NONE,
@@ -10,15 +12,11 @@ enum regulationMode_E {
   REGULATION_MODE_ANGLE
 };
 
-void debug(float a);
 
-void setWz(float val);
-void setRegulation(bool val);
-void updateKp(float val);
-void updateKi(float val);
-void updateKd(float val);
-void setDirection(bool dir);
-void setPWM(uint8_t pwm);
-void setRegMode(char *str);
+void USER_CMD_motorPwm(int pwm);
+void USER_CMD_regWz(float wz);
+void USER_CMD_regAngle(float angle);
+void USER_CMD_regNone(void);
+
 
 #endif // MAIN_H_INCLUDED

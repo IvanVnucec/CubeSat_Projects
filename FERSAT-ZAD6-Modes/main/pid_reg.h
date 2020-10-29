@@ -38,6 +38,7 @@ typedef struct PID_Handle_s PID_Handle_t;
 
 void  PID_Init		(PID_Handle_t *hpid, float Kp, float Ki, float Kd, float Ts);
 float PID_Regulate	(PID_Handle_t *hpid, float error);
+void PID_ResetIntegral(PID_Handle_t *hpid);
 
 #ifdef __cplusplus
 }

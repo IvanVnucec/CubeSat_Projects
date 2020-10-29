@@ -30,102 +30,46 @@
  *                  example below.
  */
 PSR_Status_t PSR_Call_function(const PSR_Command_t *command) {
-    /* ---------------------------------------------- setWz(float val) ---------*/
-    if (PSR_Compare_command(command, "setWz") == PSR_OK) {
-        float val;
+    if (PSR_Compare_command(command, "motorPwm") == PSR_OK) {
+        int val;
         /* Convert the input argument */
-        if (PSR_Argument_to_float(&val, command) == PSR_OK) {
-            /* Call the original function */
-            setWz(val);
-
-        } else {
-            /* Return Error if we cannot convert the argument */
-            return PSR_ERROR;
-        }
-
-    /* -------------------------------------------- void setRegulation(const bool val); ---------*/
-    } else if (PSR_Compare_command(command, "setRegulation") == PSR_OK) {
-        int val;
-        /* Convert the Argument to appropriate type */
-        if (PSR_Argument_to_bool(&val, command) == PSR_OK) {
-            /* Call the original function */
-            setRegulation(val);
-
-        } else {
-            /* Return Error if we cannot convert the argument */
-            return PSR_ERROR;
-        }
-
-    /* --------------------------------------------------- void updateKp(float val) ----------*/
-    } else if (PSR_Compare_command(command, "updateKp") == PSR_OK) {
-        float val;
-        /* Convert the Argument to appropriate type */
-        if (PSR_Argument_to_float(&val, command) == PSR_OK) {
-            /* Call the original function */
-            updateKp(val);
-
-        } else {
-            /* Return Error if we cannot convert the argument */
-            PSR_ERROR;
-        }
-
-    /* --------------------------------------------------- void updateKi(float val) -------*/
-    } else if (PSR_Compare_command(command, "updateKi") == PSR_OK) {
-        float val;
-        /* Convert the Argument to appropriate type */
-        if (PSR_Argument_to_float(&val, command) == PSR_OK) {
-            /* Call the original function */
-            updateKi(val);
-
-        } else {
-            /* Return Error if we cannot convert the argument */
-            PSR_ERROR;
-        }
-
-    /* --------------------------------------------------- void updateKd(float val) -------*/
-    } else if (PSR_Compare_command(command, "updateKd") == PSR_OK) {
-        float val;
-        /* Convert the Argument to appropriate type */
-        if (PSR_Argument_to_float(&val, command) == PSR_OK) {
-            /* Call the original function */
-            updateKd(val);
-
-        } else {
-            /* Return Error if we cannot convert the argument */
-            PSR_ERROR;
-        }
-
-    /* --------------------------------------------------- void setDirection(bool dir) -------*/
-    } else if (PSR_Compare_command(command, "setDirection") == PSR_OK) {
-        int val;
-        /* Convert the Argument to appropriate type */
-        if (PSR_Argument_to_bool(&val, command) == PSR_OK) {
-            /* Call the original function */
-            setDirection(val);
-
-        } else {
-            /* Return Error if we cannot convert the argument */
-            PSR_ERROR;
-        }
-    
-    /* --------------------------------------------------- void setPWM(uint8_t pwm); -------*/
-    } else if (PSR_Compare_command(command, "setPWM") == PSR_OK) {
-        int val;
-        /* Convert the Argument to appropriate type */
         if (PSR_Argument_to_int(&val, command) == PSR_OK) {
             /* Call the original function */
-            setPWM(val);
+            USER_CMD_motorPwm(val);
 
         } else {
             /* Return Error if we cannot convert the argument */
-            PSR_ERROR;
+            return PSR_ERROR;
+        }
+    
+    } else if (PSR_Compare_command(command, "regWz") == PSR_OK) {
+        float val;
+        /* Convert the Argument to appropriate type */
+        if (PSR_Argument_to_float(&val, command) == PSR_OK) {
+            /* Call the original function */
+            USER_CMD_regWz(val);
+
+        } else {
+            /* Return Error if we cannot convert the argument */
+            return PSR_ERROR;
+        }
+        
+    } else if (PSR_Compare_command(command, "regAngle") == PSR_OK) {
+        float val;
+        /* Convert the Argument to appropriate type */
+        if (PSR_Argument_to_float(&val, command) == PSR_OK) {
+            /* Call the original function */
+            USER_CMD_regAngle(val);
+
+        } else {
+            /* Return Error if we cannot convert the argument */
+            return PSR_ERROR;
         }
 
-    /* --------------------------------------------------- void setMode(char *str); -------*/
-    } else if (PSR_Compare_command(command, "setRegMode") == PSR_OK) {
-
+    } else if (PSR_Compare_command(command, "regNone") == PSR_OK) {
         /* Call the original function */
-            setRegMode((char *)command);
+        USER_CMD_regNone();
+
     /* -------------------------------------------------------------- no functions to call ---- */
     } else {
         /* Return error because we could not find appropriate function name */
