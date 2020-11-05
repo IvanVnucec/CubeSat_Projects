@@ -6,9 +6,9 @@
 #include "motor.h"
 
 
-#define REG_ANGLE_PID_COEFF_P  73.6f
-#define REG_ANGLE_PID_COEFF_I  6.3f
-#define REG_ANGLE_PID_COEFF_D  74.4f
+#define REG_ANGLE_PID_COEFF_P  4.94f
+#define REG_ANGLE_PID_COEFF_I  0.75f
+#define REG_ANGLE_PID_COEFF_D  6.484f
 #define REG_ANGLE_PID_PERIOD_S 0.1f
 #define REG_ANGLE_PID_PERIOD_MS (REG_ANGLE_PID_PERIOD_S * 1000.0f)
 
