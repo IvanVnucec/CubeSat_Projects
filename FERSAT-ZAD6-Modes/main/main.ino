@@ -75,7 +75,7 @@ void loop() {
     case REGULATION_MODE_ANGLE :
       IMU.readSensor();
       wz_real = IMU.getGyroZ_rads();
-      angle_real += wz_real * REG_ANGLE_PID_PERIOD_S;
+      angle_real += REG_ANGLE_RAD_TO_DEG(wz_real * REG_ANGLE_PID_PERIOD_S);
 
       REG_ANGLE_regulate(angle_desired, angle_real);
 

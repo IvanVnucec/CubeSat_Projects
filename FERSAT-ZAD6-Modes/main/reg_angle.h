@@ -12,6 +12,8 @@
 #define REG_ANGLE_PID_PERIOD_S 0.1f
 #define REG_ANGLE_PID_PERIOD_MS (REG_ANGLE_PID_PERIOD_S * 1000.0f)
 
+#define REG_ANGLE_RAD_TO_DEG(x) ((x) / 3.14159f * 180.0f)
+
 
 void REG_ANGLE_init(void);
 void REG_ANGLE_startRegulation(void);
