@@ -3,10 +3,12 @@
 #include "parser.h"
 #include <SoftwareSerial.h>
 #include "reg_wz.h"
+#include "reg_angle.h"
 
 #include <stdlib.h>
 
 #define MAX_INPUT_STRING_BYTES 50
+
 
 /**************************************************************************************
                                  GLOBALNE VARIJABLE
@@ -19,6 +21,10 @@ MPU9250 IMU(Wire, 0x68);
 enum regulationMode_E regulationMode = REGULATION_MODE_NONE;
 
 float wz_desired = 0.0f;
+float angle_desired = 0.0f;
+
+float wz_real = 0.0f;
+float angle_real = 0.0f;
 
 /**************************************************************************************
                                       SETUP
@@ -37,6 +43,9 @@ void setup() {
   /* Wz regulator init */
   REG_WZ_init();
 
+  /* Angle regulator init */
+  REG_ANGLE_init();
+  
   // reserve 200 bytes for the inputString of parser
   inputString.reserve(MAX_INPUT_STRING_BYTES);
 }
@@ -47,8 +56,6 @@ void setup() {
                                       LOOP
 ***************************************************************************************/
 void loop() {
-  float wz_real;
-  
   // Parser
   check_for_new_command();
 
@@ -66,6 +73,13 @@ void loop() {
       break;
       
     case REGULATION_MODE_ANGLE :
+      IMU.readSensor();
+      wz_real = IMU.getGyroZ_rads();
+      angle_real += wz_real * REG_ANGLE_PID_PERIOD_S;
+
+      REG_ANGLE_regulate(angle_desired, angle_real);
+
+      delay(REG_ANGLE_PID_PERIOD_MS);
       break;
     
     default :
@@ -78,16 +92,16 @@ void loop() {
 void USER_CMD_regNone(void) {
   regulationMode = REGULATION_MODE_NONE;
 
-  REG_WZ_pause();
-
-  REG_WZ_pause();
+  REG_WZ_stopRegulation();
+  REG_ANGLE_stopRegulation();
 }
 
 
 void USER_CMD_motorPwm(int pwm) {
   regulationMode = REGULATION_MODE_NONE;
 
-  REG_WZ_pause();
+  REG_WZ_stopRegulation();
+  REG_ANGLE_stopRegulation();
   
   MOTOR_setPwm(pwm);
 }
@@ -97,14 +111,20 @@ void USER_CMD_regWz(float wz) {
   regulationMode = REGULATION_MODE_OMEGA;
   wz_desired = wz;
 
+  REG_ANGLE_stopRegulation();
+
   REG_WZ_startRegulation();
 }
 
 
 void USER_CMD_regAngle(float a) {
   regulationMode = REGULATION_MODE_ANGLE;
+  angle_real = 0.0f;
+  angle_desired = a;
 
-  REG_WZ_pause();
+  REG_WZ_stopRegulation();
+
+  REG_ANGLE_startRegulation();
 }
 
 

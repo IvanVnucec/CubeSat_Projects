@@ -1,16 +1,16 @@
-#include "reg_wz.h"
+#include "reg_angle.h"
 
 
 static PID_Handle_t hpid;
 static int regulation_running = 0;
 
 
-void REG_WZ_init(void) {
+void REG_ANGLE_init(void) {
   PID_Init(&hpid, 
-    REG_WZ_PID_COEFF_P, 
-    REG_WZ_PID_COEFF_I, 
-    REG_WZ_PID_COEFF_D, 
-    REG_WZ_PID_PERIOD_S);
+    REG_ANGLE_PID_COEFF_P, 
+    REG_ANGLE_PID_COEFF_I, 
+    REG_ANGLE_PID_COEFF_D, 
+    REG_ANGLE_PID_PERIOD_S);
 
   MOTOR_init();
 
@@ -18,29 +18,29 @@ void REG_WZ_init(void) {
 }
 
 
-void REG_WZ_startRegulation(void) {
+void REG_ANGLE_startRegulation(void) {
   regulation_running = 1;
 }
 
 
-void REG_WZ_stopRegulation(void) {
+void REG_ANGLE_stopRegulation(void) {
   regulation_running = 0;
   PID_ResetIntegral(&hpid);
   MOTOR_setPwm(0);
 }
 
 
-void REG_WZ_pauseRegulation(void) {
+void REG_ANGLE_pauseRegulation(void) {
   regulation_running = 0;
 }
 
 
-void REG_WZ_regulate(float desired_wz, float real_wz) {
+void REG_ANGLE_regulate(float desired_angle, float real_angle) {
   float error;
   float output;
   
   if (regulation_running == 1) {
-    error = desired_wz - real_wz;  
+    error = desired_angle - real_angle;  
     output = PID_Regulate(&hpid, error);
     MOTOR_setPwm(output);
   }
