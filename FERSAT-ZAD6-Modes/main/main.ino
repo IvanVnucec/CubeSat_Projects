@@ -65,7 +65,7 @@ void loop() {
       delay(REG_WZ_PID_PERIOD_MS);
       break;
       
-    case REGULATION_MODE_ANGLE :  
+    case REGULATION_MODE_ANGLE :
       break;
     
     default :
@@ -77,6 +77,8 @@ void loop() {
 
 void USER_CMD_regNone(void) {
   regulationMode = REGULATION_MODE_NONE;
+
+  REG_WZ_pause();
 
   REG_WZ_pause();
 }
