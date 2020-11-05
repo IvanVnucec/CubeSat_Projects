@@ -2,7 +2,7 @@
 #include "motor.h"
 
 
-inline void MOTOR_init(void) {
+void MOTOR_init(void) {
   // Initialize pins for motor control
   pinMode(MOTOR_PIN, OUTPUT);
   pinMode(MOTOR_DIRECTION_PIN, OUTPUT);

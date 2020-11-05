@@ -10,7 +10,7 @@
 #define MOTOR_MAX_PWM 255
 
 
-inline void MOTOR_init(void);
+void MOTOR_init(void);
 void MOTOR_setPwm(int pwm);
 
 
