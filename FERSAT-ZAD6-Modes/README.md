@@ -1,5 +1,5 @@
 # FERSAT-ZAD6-Modes
-Implementing few functions for mode selection.
+This code revision has implemented regulation of angular velocity over Z axis and regulation of relative angle displacment (still work in progress). User can send commands to the sattelite over COM port (see listed functions below).
 
 ## Functions
 User can send functions to a sattelite over serial port by typing:
