@@ -104,7 +104,7 @@ void loop() {
       Serial.print(",");
       Serial.print(angle_desired);
       Serial.print(",");
-      Serial.print(angle_real - angle_desired);
+      Serial.print(angle_desired - angle_real);
       Serial.print(",");
       Serial.println(reg_out);
       
