@@ -35,13 +35,15 @@ void REG_ANGLE_pauseRegulation(void) {
 }
 
 
-void REG_ANGLE_regulate(float desired_angle, float real_angle) {
+float REG_ANGLE_regulate(float desired_angle, float real_angle) {
   float error;
-  float output;
+  float output = 0.0f;
   
   if (regulation_running == 1) {
     error = desired_angle - real_angle;  
     output = PID_Regulate(&hpid, error);
     MOTOR_setPwm(output);
   }
+  
+  return output;
 }
