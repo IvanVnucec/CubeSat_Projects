@@ -66,6 +66,12 @@ void loop() {
       IMU.readSensor();
       wz_real = IMU.getGyroZ_rads();
       
+      Serial.print(wz_real);
+      Serial.print(",");
+      Serial.print(wz_real);
+      Serial.print(",");
+      Serial.print(wz_real);
+      Serial.print(",");
       Serial.println(wz_real);
       
       delay(100);
