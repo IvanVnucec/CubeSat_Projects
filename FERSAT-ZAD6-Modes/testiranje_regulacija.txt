@@ -1,0 +1,17 @@
+TESTIRANJE ZA SATELIT V1
+Postupak:
+1. Otvori stranicu: https://github.com/IvanVnucec/CubeSat_Projects
+2. Skini projekt: Klik na zeleni gumb Code -> Download ZIP
+3. Udji u CubeSat_Projects-master i ekstrahiraj samo FERSAT-ZAD6-Modes negdje na racunalu (npr Desktop)
+4. Otvori FERSAT-ZAD6-Modes/main/main.ino (trebao bi se otvoriti Arduino IDE)
+5. Odspoji Bluetooth modul na satelitu
+6. Spoji USB-om satelit i racunalo
+7. U Arduino IDEu otvori COM port: Tools->Port->(jedan od COM portova)
+8. Uploadaj kod
+9. Odspoji USB
+10. Ukopcaj Bluetooth
+11. Fiksiraj kuglu da se ne mice niti oko jedne osi.
+12. Upali satelit pomocu switcha i pricekaj 10tak sekundi da se satelit kalibrira
+13. Spoji se pomocu Bluetootha na satelit.
+14. Inicijalno bi trebali primati samo podatke o kutnoj brzini oko Z osi.
+15. 
