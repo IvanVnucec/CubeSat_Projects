@@ -19,7 +19,7 @@ void REG_ANGLE_init(void);
 void REG_ANGLE_startRegulation(void);
 void REG_ANGLE_stopRegulation(void);
 void REG_ANGLE_pauseRegulation(void);
-void REG_ANGLE_regulate(float desired_angle, float real_angle);
+float REG_ANGLE_regulate(float desired_angle, float real_angle);
 
 
 #endif /* REG_ANGLE_H__ */
