@@ -26,6 +26,8 @@ float angle_desired = 0.0f;
 float wz_real = 0.0f;
 float angle_real = 0.0f;
 
+int reg_out;
+
 /**************************************************************************************
                                       SETUP
 ***************************************************************************************/
@@ -61,25 +63,51 @@ void loop() {
 
   switch(regulationMode) {
     case REGULATION_MODE_NONE :
+      IMU.readSensor();
+      wz_real = IMU.getGyroZ_rads();
+      
+      Serial.println(wz_real);
+      
+      delay(100);
+      
       break;
       
     case REGULATION_MODE_OMEGA :
       IMU.readSensor();
       wz_real = IMU.getGyroZ_rads();
       
-      REG_WZ_regulate(wz_desired, wz_real);
-      
       delay(REG_WZ_PID_PERIOD_MS);
+      
+      reg_out = REG_WZ_regulate(wz_desired, wz_real);
+      
+      Serial.print(wz_real);
+      Serial.print(",");
+      Serial.print(wz_desired);
+      Serial.print(",");
+      Serial.print(wz_desired - wz_real);
+      Serial.print(",");
+      Serial.println(reg_out);
+      
       break;
       
     case REGULATION_MODE_ANGLE :
       IMU.readSensor();
       wz_real = IMU.getGyroZ_rads();
-      angle_real += REG_ANGLE_RAD_TO_DEG(wz_real * REG_ANGLE_PID_PERIOD_S);
-
-      REG_ANGLE_regulate(angle_desired, angle_real);
-
+      
       delay(REG_ANGLE_PID_PERIOD_MS);
+      
+      angle_real += REG_ANGLE_RAD_TO_DEG(wz_real * REG_ANGLE_PID_PERIOD_S);
+      
+      reg_out = REG_ANGLE_regulate(angle_desired, angle_real);
+      
+      Serial.print(angle_real);
+      Serial.print(",");
+      Serial.print(angle_desired);
+      Serial.print(",");
+      Serial.print(angle_real - angle_desired);
+      Serial.print(",");
+      Serial.println(reg_out);
+      
       break;
     
     default :
