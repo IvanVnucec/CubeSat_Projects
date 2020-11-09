@@ -13,5 +13,24 @@ Postupak:
 11. Fiksiraj kuglu da se ne mice niti oko jedne osi.
 12. Upali satelit pomocu switcha i pricekaj 10tak sekundi da se satelit kalibrira
 13. Spoji se pomocu Bluetootha na satelit.
+13.1. Upaliti SerialPlot program. Namjestiti da prima 4 parametra odvojena zarezom (','). 
 14. Inicijalno bi trebali primati samo podatke o kutnoj brzini oko Z osi.
-15. 
+14.1. Ako se ne prikazuje nista onda provjeriti Bluetooth komunikaciju ili konfiguraciju SerialPlot programa.
+15. Upaliti zracni lezaj 
+16. Pomocu programa SerialPlot na satelit poslati komandu "motorPwm(200)\n" (bez navodnika). (napomena: vec sam zaboravio salje li se komanda sa \n ili sa \r ili nez icega. To probati).
+17. Motor bi se trebao poceti okretati.
+18. Ako se ne okrece provjeriti Bluetooth komunikaciju ili format komandi.
+19. Pomocu programa SerialPlot poslati "motorPwm(0)\n" (bez navodnika). Motor bi trebao stati.
+20. Pomocu programa SerialPlot poslati "motorPwm(-200)\n" (bez navodnika). Motor bi se trebao poceti okretati u drugu stranu.
+21. Poslati "motorPwm(0)\n".
+22. Poslati "regWz(0.5)\n". Satelit bi se trebao okretati reguliranom brzinom od 0.5 rad/s. Na ekranu su prikazane prijednosti trenutne kutne brzine, zeljene kutne brzine, razlike medju njima i outputa regulatora. Output regulatora nebi smio prelaziti vrijednosti [-255, 255] vecinu vremena. 
+23. Poslati "regWz(0.0)\n". Satelit bi se trebao prestati vrtjeti.
+24. Pokusati rukom lagano zavrtjeti satelit i vidjeti kako se on zaustavlja pomocu regulatora brzine.
+25. Poslati "regWz(-1.0)\n". Satelit bi se trebao vrtjeti u drugu stranu.
+26. Poslati "regNone()\n". Motor satelita bi trebao stati i satelit bi se trebao prestati vrtjeti zbog sile trenja lezaja i kugle. Na SerialPlotu se salje trenutna kutna brzina.
+27. Umiri satelit rukom i zapamtiti inicijalni polozaj. 
+28. Poslati "regAngle(90.0)\n". Satelit bi se trebao okrenuti za 90 stupnjeva oko Z osi. Odokativno to provjeriti. Na SerialPlot se salju: trenutni kut (u stupnjevima), zeljeni kut (u stupnjevima), medjusobna razlika (u stupnjevima) i output regulatora. Output regulatora nebi smio prelaziti vrijednosti [-255, 255] vecinu vremena. 
+29. Poslati "regAngle(0.0)\n". Satelit bi se trebao vratiti u pocetni polozaj tocke 27.
+31. Rukom lagano pokusati razmjestiti satelit i vidjeti koliko dobro on odrzava plozaj.
+32. Poslati "regNone()\n". Satelit bi trebao samo ispisivati trenutnu kutnu brzinu.
+33. Izvjestiti Ivana Vnučeca o rezultatima testa.
