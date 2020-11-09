@@ -17,7 +17,7 @@ void REG_WZ_init(void);
 void REG_WZ_startRegulation(void);
 void REG_WZ_stopRegulation(void);
 void REG_WZ_pauseRegulation(void);
-void REG_WZ_regulate(float desired_wz, float real_wz);
+float REG_WZ_regulate(float desired_wz, float real_wz);
 
 
 #endif /* REG_WZ_H__ */
