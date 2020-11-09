@@ -35,13 +35,15 @@ void REG_WZ_pauseRegulation(void) {
 }
 
 
-void REG_WZ_regulate(float desired_wz, float real_wz) {
+float REG_WZ_regulate(float desired_wz, float real_wz) {
   float error;
-  float output;
+  float output = 0.0f;
   
   if (regulation_running == 1) {
     error = desired_wz - real_wz;  
     output = PID_Regulate(&hpid, error);
     MOTOR_setPwm(output);
   }
+  
+  return output;
 }
