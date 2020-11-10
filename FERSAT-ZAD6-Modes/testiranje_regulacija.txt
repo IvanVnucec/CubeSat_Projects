@@ -29,7 +29,7 @@ Postupak:
 25. Poslati "regWz(-1.0)\n". Satelit bi se trebao vrtjeti u drugu stranu.
 26. Poslati "regNone()\n". Motor satelita bi trebao stati i satelit bi se trebao prestati vrtjeti zbog sile trenja lezaja i kugle. Na SerialPlotu se salje trenutna kutna brzina.
 27. Umiri satelit rukom i zapamtiti inicijalni polozaj. 
-28. Poslati "regAngle(90.0)\n". Satelit bi se trebao okrenuti za 90 stupnjeva oko Z osi. Odokativno to provjeriti. Na SerialPlot se salju: trenutni kut (u stupnjevima), zeljeni kut (u stupnjevima), medjusobna razlika (u stupnjevima) i output regulatora. Output regulatora nebi smio prelaziti vrijednosti [-255, 255] vecinu vremena. 
+28. Poslati "regAngle(-90.0)\n". Satelit bi se trebao okrenuti za 90 stupnjeva oko Z osi. Odokativno to provjeriti. Na SerialPlot se salju: trenutni kut (u stupnjevima), zeljeni kut (u stupnjevima), medjusobna razlika (u stupnjevima) i output regulatora. Output regulatora nebi smio prelaziti vrijednosti [-255, 255] vecinu vremena. 
 29. Poslati "regAngle(0.0)\n". Satelit bi se trebao vratiti u pocetni polozaj tocke 27.
 31. Rukom lagano pokusati razmjestiti satelit i vidjeti koliko dobro on odrzava plozaj.
 32. Poslati "regNone()\n". Satelit bi trebao samo ispisivati trenutnu kutnu brzinu.
