@@ -9,7 +9,7 @@
 #define REG_WZ_PID_COEFF_P  231.5f
 #define REG_WZ_PID_COEFF_I  117.0f
 #define REG_WZ_PID_COEFF_D  0.0f
-#define REG_WZ_PID_COEFF_V  20.0f
+#define REG_WZ_PID_COEFF_V  15.0f
 #define REG_WZ_PID_PERIOD_S 0.1f
 #define REG_WZ_PID_PERIOD_MS (REG_WZ_PID_PERIOD_S * 1000.0f)
 
