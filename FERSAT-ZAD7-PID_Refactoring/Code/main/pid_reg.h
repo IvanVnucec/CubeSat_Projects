@@ -29,7 +29,7 @@ struct PID_Handle_s {
   float ui1;  /* output of I term ui(k-1) */
   float ud0;  /* output of D term ud(k) */
   float ud1;  /* output of D term ud(k-1) */
-  float u0;   /* output of PID regulator */
+  float u0;   /* output of PID regulator u(k) */
 
   float e0;
   float e1;
